@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+  
+  <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <property name="driverClassName" value="${jdbc.driverClass}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.user}"/>
+    <property name="password" value="${jdbc.password}"/>
+    <property name="maxActive" value="${jdbc.maxActive}"/>
+    <property name="minIdle" value="${jdbc.minIdle}"/>
+    <property name="initialSize" value="${jdbc.initialSize}"/>
+    <property name="validationQuery" value="SELECT 1" />
+    <property name="testOnBorrow" value="false" />
+    <property name="testOnReturn" value="false" />
+    <property name="testWhileIdle" value="true" />
+    <property name="timeBetweenEvictionRunsMillis" value="60000" />
+    <property name="minEvictableIdleTimeMillis" value="300000" />
+    <property name="defaultAutoCommit" value="true"/>
+    <property name="removeAbandoned" value="${druid.remove.abandoned}"/>
+    <property name="removeAbandonedTimeout" value="${druid.remove.abandoned.timeout}"/>
+    <property name="logAbandoned" value="true"/>
+    <property name="filters" value="stat" />
+    <property name="connectionProperties" value="${jdbc.connection.properties}"/>
+    <property name="maxWait" value="${jdbc.maxWait}"/>
+  </bean>
+
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="typeAliasesPackage" value="com.cong.swag.common.VO"/>
+    <property name="mapperLocations">
+      <list>
+        <value>classpath*:mappers/*.xml</value>
+      </list>
+    </property>
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+
+  <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+    <constructor-arg index="0" ref="sqlSessionFactory" />
+  </bean>
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+  <import resource="application-dubbo-export.xml"/>
+  <import resource="application-dubbo-import.xml"/>
+
+  <dubbo:application name="${systemInfo.appName}"/>
+  <dubbo:registry address="${dubbo.registry}"/>
+  <!--<dubbo:provider export="${dubbo.export}" token="${dubbo.token}"/>-->
+  <dubbo:protocol name="dubbo" port="${dubbo.port}"/>
+  <dubbo:monitor protocol="registry"/>
+  <dubbo:consumer timeout="${dubbo.timeout}"/>
+
+  <dubbo:doc name="${systemInfo.appName}" enable="${dubbo.doc.enable}" version="${application.version}"
+    groupId="${application.groupId}" artifactId="${application.artifactId}" address="${dubbo.registry}"/>
+
+</beans>

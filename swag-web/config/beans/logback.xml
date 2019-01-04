@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <property name="LOG_DIR" value="${APP_HOME}/logs" />
+  <property name="PATTERN" value="[%date{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] [%logger:%line] %msg%n" />
+  <property name="PATTERN_PUSH" value="[%date{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] [%logger:%line] %msg%n" />
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>${PATTERN}</Pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <appender name="APP_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/debug.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <FileNamePattern>${LOG_DIR}/debug.%d{yyyy-MM-dd}.log
+      </FileNamePattern>
+    </rollingPolicy>
+    <encoder>
+      <Pattern>${PATTERN_PUSH}</Pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>DEBUG</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="APP_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/info.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <FileNamePattern>${LOG_DIR}/info.%d{yyyy-MM-dd}.log
+      </FileNamePattern>
+    </rollingPolicy>
+    <encoder>
+      <Pattern>${PATTERN_PUSH}</Pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="APP_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/error.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <FileNamePattern>${LOG_DIR}/error.%d{yyyy-MM-dd}.log
+      </FileNamePattern>
+    </rollingPolicy>
+    <encoder>
+      <Pattern>${PATTERN_PUSH}</Pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <root>
+    <level value="info" />
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="APP_INFO" />
+    <appender-ref ref="APP_ERROR" />
+  </root>
+
+</configuration>

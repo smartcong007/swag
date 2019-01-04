@@ -1,0 +1,9 @@
+.DS_Store
+**/*/.DS_store
+.idea/
+APP_HOME_IS_UNDEFINED/
+*.iml
+**/target/
+/*/APP_HOME_IS_UNDEFINE/
+/*/target
+/*/*.iml
