@@ -1,7 +1,6 @@
 package com.cong.swag.test;
 
 import com.cong.swag.common.VO.UserVO;
-import com.cong.swag.service.remoting.DubboTestRemotingService;
 import com.cong.swag.service.user.UserService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,9 +26,6 @@ public class BaseTest {
     @Autowired
     UserService userService;
 
-    @Autowired
-    DubboTestRemotingService dubboTestRemotingService;
-
     @Test
     public void test(){
         UserVO userVO = userService.getUser(5437);
@@ -43,8 +39,4 @@ public class BaseTest {
         LOGGER.error("开始测试日志功能");
     }
 
-    @Test
-    public void testDubbo(){
-        LOGGER.info(dubboTestRemotingService.printHellow());
-    }
 }

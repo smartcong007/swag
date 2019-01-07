@@ -382,6 +382,7 @@
     <module>swag-dao</module>
     <module>swag-common</module>
     <module>swag-api</module>
+    <module>swag-remoting</module>
   </modules>
 
 </project>
