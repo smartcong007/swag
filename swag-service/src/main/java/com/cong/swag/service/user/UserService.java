@@ -9,4 +9,6 @@ public interface UserService {
 
     UserVO getUser(Integer id);
 
+    boolean insert(UserVO userVO);
+
 }

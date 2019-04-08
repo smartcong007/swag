@@ -16,6 +16,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO getUser(Integer id) {
-        return userDao.getUserById(id);
+        return userDao.getUserByUserId(id);
+    }
+
+    @Override
+    public boolean insert(UserVO userVO) {
+        return userDao.insertUser(userVO) == 1;
     }
 }

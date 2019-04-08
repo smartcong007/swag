@@ -5,8 +5,12 @@
     SELECT * FROM user
     <where>
       <if test="_parameter != null">
-        id=#{id}
+        user_id=#{id}
       </if>
     </where>
   </select>
+  
+  <insert id="insertUser">
+    insert into user (user_id,name,age,logo) values (#{userId}, #{name}, #{age}, #{logo})
+  </insert>
 </mapper>

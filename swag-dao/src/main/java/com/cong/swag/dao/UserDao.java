@@ -7,6 +7,8 @@ import com.cong.swag.common.VO.UserVO;
  */
 public interface UserDao {
 
-    UserVO getUserById(Integer id);
+    UserVO getUserByUserId(Integer userId);
+
+    int insertUser(UserVO userVO);
 
 }

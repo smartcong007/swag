@@ -2,7 +2,6 @@ package com.cong.swag.common.VO;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,6 +18,9 @@ public class UserVO {
     @ApiModelProperty(name = "id", value = "用户id")
     private Integer id;
 
+    @ApiModelProperty(name = "userId", value = "用户Id")
+    private Integer userId;
+
     @ApiModelProperty(name = "name", value = "姓名")
     private String name;
 
@@ -27,11 +29,5 @@ public class UserVO {
 
     @ApiModelProperty(name = "logo", value = "头像")
     private String logo;
-
-    @ApiModelProperty(hidden = true)
-    private Date dateCreate;
-
-    @ApiModelProperty(hidden = true)
-    private Date dateUpdate;
 
 }
