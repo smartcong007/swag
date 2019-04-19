@@ -3,7 +3,6 @@ package com.cong.swag.test;
 import com.cong.swag.common.VO.AuditInfoVO;
 import com.cong.swag.common.VO.AuditSnapshotVO;
 import com.cong.swag.common.VO.AuditTypeVO;
-import com.cong.swag.common.VO.UserVO;
 import com.cong.swag.common.util.AuditTypeHolder;
 import com.cong.swag.dao.AuditSnapshotDao;
 import com.cong.swag.dao.AuditTypeDao;
@@ -41,9 +40,9 @@ public class BaseTest {
 
     @Test
     public void test() {
-        UserVO userVO = userService.getUser(5);
-        Assert.assertNotNull(userVO);
-        Assert.assertEquals(java.util.Optional.of(23),userVO.getAge());
+//        UserVO userVO = UserVO.builder().userId(3).age(23).name("jj").build();
+//        boolean i = userService.insert(userVO);
+//        Assert.assertTrue(i);
     }
 
     @Test
