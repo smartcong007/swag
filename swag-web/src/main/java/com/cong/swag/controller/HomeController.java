@@ -58,4 +58,11 @@ public class HomeController {
         return auditSnapshotDao.listAuditSnapshot(idRef, auditType);
     }
 
+    @RequestMapping(value = "/app", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value = "获取app名称")
+    public String getAppName() {
+        return userService.getAppName();
+    }
+
 }

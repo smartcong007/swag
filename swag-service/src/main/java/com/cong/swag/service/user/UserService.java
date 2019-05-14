@@ -11,4 +11,6 @@ public interface UserService {
 
     boolean insert(UserVO userVO);
 
+    String getAppName();
+
 }

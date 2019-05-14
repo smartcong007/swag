@@ -8,7 +8,7 @@
 
   <dubbo:application name="${systemInfo.appName}"/>
   <dubbo:registry address="${dubbo.registry}"/>
-  <!--<dubbo:provider export="${dubbo.export}" token="${dubbo.token}"/>-->
+  <dubbo:provider export="${dubbo.export}"/>
   <dubbo:protocol name="dubbo" port="${dubbo.port}"/>
   <dubbo:monitor protocol="registry"/>
   <dubbo:consumer timeout="${dubbo.timeout}"/>

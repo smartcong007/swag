@@ -2,7 +2,6 @@ package com.cong.swag.common.VO;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +12,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Builder
 @ApiModel(value = "user model", description = "用户模型")
 public class UserVO {
 

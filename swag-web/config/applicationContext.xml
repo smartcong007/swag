@@ -17,8 +17,10 @@
        http://www.springframework.org/schema/task
         http://www.springframework.org/schema/task/spring-task.xsd">
 
-  <context:annotation-config/>
-  <context:component-scan base-package="com.cong.swag"/>
+  <context:component-scan base-package="com.cong.swag">
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    <context:exclude-filter type="annotation" expression="springfox.documentation.swagger2.annotations.EnableSwagger2"/>
+  </context:component-scan>
   <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations">
       <list>
