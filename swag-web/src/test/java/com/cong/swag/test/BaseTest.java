@@ -38,12 +38,6 @@ public class BaseTest {
     @Autowired
     AuditSnapshotDao auditSnapshotDao;
 
-    @Test
-    public void test() {
-//        UserVO userVO = UserVO.builder().userId(3).age(23).name("jj").build();
-//        boolean i = userService.insert(userVO);
-//        Assert.assertTrue(i);
-    }
 
     @Test
     public void test3(){
