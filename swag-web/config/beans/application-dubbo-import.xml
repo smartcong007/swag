@@ -6,5 +6,5 @@
     					http://www.springframework.org/schema/beans/spring-beans.xsd
     					http://code.alibabatech.com/schema/dubbo
     					http://souche.oss-cn-hangzhou.aliyuncs.com/files/dubbo/dubbo.xsd">
-
+  
 </beans>

@@ -1,7 +1,7 @@
 package com.cong.swag.service.sharding;
 
-import io.shardingjdbc.core.api.algorithm.sharding.PreciseShardingValue;
-import io.shardingjdbc.core.api.algorithm.sharding.standard.PreciseShardingAlgorithm;
+import io.shardingsphere.api.algorithm.sharding.PreciseShardingValue;
+import io.shardingsphere.api.algorithm.sharding.standard.PreciseShardingAlgorithm;
 import java.util.Collection;
 
 /**

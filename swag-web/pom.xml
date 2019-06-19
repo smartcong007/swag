@@ -128,10 +128,10 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>io.shardingjdbc</groupId>
-            <artifactId>sharding-jdbc-core</artifactId>
-        </dependency>
+      <dependency>
+        <groupId>io.shardingsphere</groupId>
+        <artifactId>sharding-jdbc-core</artifactId>
+      </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>

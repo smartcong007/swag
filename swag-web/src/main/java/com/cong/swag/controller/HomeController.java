@@ -1,14 +1,16 @@
 package com.cong.swag.controller;
 
-import com.cong.swag.common.VO.AuditSnapshotVO;
+import com.cong.swag.common.VO.GoodsVO;
 import com.cong.swag.common.VO.UserVO;
 import com.cong.swag.common.exception.CommonException;
-import com.cong.swag.dao.AuditSnapshotDao;
+import com.cong.swag.common.util.Result;
+import com.cong.swag.dao.GoodsDao;
 import com.cong.swag.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -35,7 +36,9 @@ public class HomeController {
     UserService userService;
 
     @Autowired
-    AuditSnapshotDao auditSnapshotDao;
+    GoodsDao goodsDao;
+
+    private Lock lock = new ReentrantLock();
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     @ApiOperation(value = "首页")
@@ -55,16 +58,6 @@ public class HomeController {
         }
     }
 
-    @RequestMapping(value = "/audit/snapshot", method = RequestMethod.GET)
-    @ResponseBody
-    @ApiOperation(value = "获取审批操作记录")
-    public List<AuditSnapshotVO> getSnapshots(
-        @ApiParam(name = "auditType", value = "审批类型") @RequestParam String auditType,
-        @ApiParam(name = "idRef", value = "订单id") @RequestParam String idRef
-    ) {
-        return auditSnapshotDao.listAuditSnapshot(idRef, auditType);
-    }
-
     @RequestMapping(value = "/app", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "获取app名称")
@@ -80,5 +73,25 @@ public class HomeController {
         return userVO;
 
     }
+
+    @RequestMapping(value = "/goods/order/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value = "下单")
+    public Result order(@ApiParam(value = "商品Id") @PathVariable("id") Long id) {
+        lock.lock();
+        GoodsVO goodsVO = goodsDao.getGoodsById(id);
+        if (goodsVO == null) {
+            throw new CommonException(404, "商品不存在");
+        }
+        int expect = goodsVO.getStorage();
+        if (expect <= 0) {
+            throw new CommonException(500, "商品抢光啦");
+        }
+        int res = goodsDao.purchaseGoods(id, expect);
+        lock.unlock();
+        return res==1?Result.success("抢购成功"):Result.fail("500", "抢购失败");
+    }
+
+
 
 }

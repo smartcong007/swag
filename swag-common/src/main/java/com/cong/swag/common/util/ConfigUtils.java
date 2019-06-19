@@ -87,7 +87,6 @@ public class ConfigUtils {
                 }
             } catch (IOException e) {
                 LOGGER.warn("", e);
-//                e.printStackTrace();
                 props = new Properties();
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();

@@ -10,8 +10,10 @@
   <aop:config>
 
     <aop:pointcut id="simpleExecuion" expression="execution(* com..UserService.insert(*))"/>
+    <aop:pointcut id="insertExecuion" expression="execution(* com..GoodsDao.addGoods(*))"/>
     <aop:aspect ref="simpleAdvice">
       <aop:before method="simpleBeforeAdvice" pointcut-ref="simpleExecuion" />
+      <aop:around method="insertIdGenerate" pointcut-ref="insertExecuion" />
     </aop:aspect>
 
   </aop:config>

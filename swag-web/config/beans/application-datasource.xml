@@ -61,29 +61,6 @@
     <property name="maxWait" value="${jdbc.maxWait}"/>
   </bean>
 
-  <bean id="auditDb" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-    <property name="driverClassName" value="${jdbc.driverClass3}"/>
-    <property name="url" value="${jdbc.url3}"/>
-    <property name="username" value="${jdbc.user3}"/>
-    <property name="password" value="${jdbc.password3}"/>
-    <property name="maxActive" value="${jdbc.maxActive}"/>
-    <property name="minIdle" value="${jdbc.minIdle}"/>
-    <property name="initialSize" value="${jdbc.initialSize}"/>
-    <property name="validationQuery" value="SELECT 1" />
-    <property name="testOnBorrow" value="false" />
-    <property name="testOnReturn" value="false" />
-    <property name="testWhileIdle" value="true" />
-    <property name="timeBetweenEvictionRunsMillis" value="60000" />
-    <property name="minEvictableIdleTimeMillis" value="300000" />
-    <property name="defaultAutoCommit" value="true"/>
-    <property name="removeAbandoned" value="${druid.remove.abandoned}"/>
-    <property name="removeAbandonedTimeout" value="${druid.remove.abandoned.timeout}"/>
-    <property name="logAbandoned" value="true"/>
-    <property name="filters" value="stat" />
-    <property name="connectionProperties" value="${jdbc.connection.properties}"/>
-    <property name="maxWait" value="${jdbc.maxWait}"/>
-  </bean>
-
   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="configLocation" value="classpath:mybatis-config.xml" />
     <property name="typeAliasesPackage" value="com.cong.swag.common.VO"/>
@@ -103,5 +80,10 @@
     <property name="basePackage" value="com.cong.swag.dao" />
     <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
   </bean>
+
+  <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+    <property name="dataSource" ref="shardingDataSource"/>
+  </bean>
+  <tx:annotation-driven/>
 
 </beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cong.swag.dao.GoodsDao">
+
+  <resultMap id="goodsMap" type="com.cong.swag.common.VO.GoodsVO">
+    <result column="id" property="id" />
+    <result column="storage" property="storage" />
+  </resultMap>
+
+  <insert id="addGoods">
+    insert into goods(id, storage) values(#{id}, #{storage})
+  </insert>
+
+  <update id="purchaseGoods">
+    update goods set storage=storage-1 where id=#{goodsId} and storage=#{expectStorage} and storage>0
+  </update>
+
+  <select id="getGoodsById" resultMap="goodsMap">
+    select * from goods where id=#{goodsId}
+  </select>
+
+</mapper>
