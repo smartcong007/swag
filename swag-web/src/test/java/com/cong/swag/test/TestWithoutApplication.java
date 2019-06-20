@@ -1,5 +1,6 @@
 package com.cong.swag.test;
 
+import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -9,12 +10,31 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class TestWithoutApplication {
 
+    private static Object obj = new Object();
 
-    public static void main(String[] args) {
+    public static void ed(String[] args) throws IOException {
 
-        String s = "ababcd";
-        int i = kmp(s, "abc");
-        System.out.println(i);
+        new Thread(() -> {
+            synchronized (obj) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("释放锁啦");
+        }).start();
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            synchronized (obj) {
+                System.out.println("获取到锁啦");
+            }
+        }).start();
+        System.in.read();
     }
 
     static void getNext(String pattern, int next[]) {
