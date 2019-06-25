@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:cache="http://www.springframework.org/schema/cache"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+  <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
+    p:maxTotal="${redis.maxTotal}"
+    p:maxIdle="${redis.maxIdle}"
+    p:minIdle="${redis.minIdle}"
+    p:maxWaitMillis="${redis.maxWait}"
+    p:testOnBorrow="true"
+    p:testOnReturn="true"
+  />
+
+  <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+    p:use-pool="true" p:host-name="${redis.host}" p:port="${redis.port}" p:password="${redis.password}"
+    p:poolConfig-ref="jedisPoolConfig"/>
+
+  <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" id="stringRedisSerializer"/>
+  <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer" id="jackson2JsonRedisSerializer" />
+
+  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+    p:connection-factory-ref="jedisConnectionFactory"
+    p:enableTransactionSupport="true"
+    p:keySerializer-ref="stringRedisSerializer"
+    p:valueSerializer-ref="jackson2JsonRedisSerializer"
+    p:hashKeySerializer-ref="stringRedisSerializer"
+    p:hashValueSerializer-ref="jackson2JsonRedisSerializer"/>
+
+  <!--redis缓存工具-->
+  <bean class="com.cong.swag.common.cache.RedisRepository" id="redisRepository">
+    <property name="redisTemplate" ref="redisTemplate" />
+    <property name="keyPrefix" value="${redis.keyPrefix}" />
+  </bean>
+
+  <!--redis分布式锁-->
+  <bean class="com.cong.swag.common.cache.RedisLock" id="redisLock">
+    <property name="redisTemplate" ref="redisTemplate" />
+  </bean>
+
+</beans>

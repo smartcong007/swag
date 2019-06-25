@@ -2,6 +2,7 @@ package com.cong.swag.common.VO;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -16,7 +17,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @ApiModel(value = "user model", description = "用户模型")
-public class UserVO {
+public class UserVO implements Serializable {
+
+    private static final long serialVersionUID = -7117586361186200446L;
 
     @ApiModelProperty(name = "id", value = "主键id")
     private Integer id;
