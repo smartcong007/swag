@@ -34,4 +34,5 @@
   <import resource="classpath*:application-dubbo.xml"/>
   <import resource="classpath*:application-aop.xml" />
   <import resource="classpath*:application-redis.xml" />
+  <import resource="classpath*:application-quartz.xml" />
 </beans>

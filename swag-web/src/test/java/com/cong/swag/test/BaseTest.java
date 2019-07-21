@@ -4,7 +4,10 @@ import com.cong.swag.common.VO.GoodsVO;
 import com.cong.swag.common.cache.RedisLock;
 import com.cong.swag.common.cache.RedisRepository;
 import com.cong.swag.dao.GoodsDao;
+import com.cong.swag.service.task.factory.JobFactory;
+import com.cong.swag.service.task.factory.TaskProducer;
 import com.cong.swag.service.user.UserService;
+import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -12,6 +15,7 @@ import java.util.concurrent.Executors;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -38,6 +42,12 @@ public class BaseTest {
 
     @Autowired
     RedisLock redisLock;
+
+    @Autowired
+    TaskProducer taskProducer;
+
+    @Autowired
+    JobFactory jobFactory;
 
     @Test
     public void goods() {
@@ -72,5 +82,16 @@ public class BaseTest {
         System.out.println("所有线程都已获取到锁");
 
     }
+
+    @Test
+    public void testTask() throws IOException, SchedulerException {
+//        JobModel jobModel = new JobModel();
+//        jobModel.setJobCreateDate(new Date());
+//        jobModel.setJobDesc("微博热搜推送");
+//        jobModel.setJobHandler("weiboHotRankPullJobHandler");
+//        taskProducer.addCronJob("weibo_hotrank_push","spider", jobModel, "0 0/15 * * * ?");
+//        System.in.read();
+    }
+
 
 }

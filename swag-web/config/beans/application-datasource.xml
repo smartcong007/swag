@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
   
   <bean id="db1" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-    <property name="driverClassName" value="${jdbc.driverClass1}"/>
+    <property name="driverClassName" value="${jdbc.driver}"/>
     <property name="url" value="${jdbc.url1}"/>
     <property name="username" value="${jdbc.user1}"/>
     <property name="password" value="${jdbc.password1}"/>
@@ -33,7 +33,7 @@
   </bean>
 
   <bean id="db2" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-    <property name="driverClassName" value="${jdbc.driverClass2}"/>
+    <property name="driverClassName" value="${jdbc.driver}"/>
     <property name="url" value="${jdbc.url2}"/>
     <property name="username" value="${jdbc.user2}"/>
     <property name="password" value="${jdbc.password2}"/>

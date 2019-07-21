@@ -1,7 +1,12 @@
 package com.cong.swag.test;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cong.swag.common.VO.UserVO;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 
 /**
  * @Description TODO
@@ -12,7 +17,7 @@ public class TestWithoutApplication {
 
     private static Object obj = new Object();
 
-    public static void ed(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         new Thread(() -> {
             synchronized (obj) {
@@ -87,6 +92,24 @@ public class TestWithoutApplication {
         }
         return -1;
 
+    }
+
+    @Test
+    public void test(){
+        List<UserVO> userVOS = new ArrayList<>(2);
+        UserVO userVO1 = new UserVO();
+        userVO1.setId(1);
+
+        UserVO userVO2 = new UserVO();
+        userVO2.setId(2);
+
+        userVOS.add(userVO1);
+        userVOS.add(userVO2);
+
+        UserVO[] users = userVOS.toArray(new UserVO[userVOS.size()]);
+        for (UserVO u:users) {
+            System.out.println(JSONObject.toJSONString(u));
+        }
     }
 
 }
