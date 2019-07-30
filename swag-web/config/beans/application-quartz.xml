@@ -35,21 +35,22 @@
     <property name="applicationContextSchedulerContextKey" value="applicationContext"/>
     <property name="quartzProperties">
       <props>
+        <prop key="org.quartz.scheduler.instanceName">swagClusteredScheduler</prop>
         <prop key="org.quartz.scheduler.instanceId">AUTO</prop>
         <!-- 线程池配置 -->
         <prop key="org.quartz.threadPool.class">${org.quartz.threadPool.class}</prop>
         <prop key="org.quartz.threadPool.threadCount">${org.quartz.threadPool.threadCount}</prop>
         <prop key="org.quartz.threadPool.threadPriority">${org.quartz.threadPool.threadPriority}</prop>
         <prop key="org.quartz.jobStore.misfireThreshold">${org.quartz.jobStore.misfireThreshold}</prop>
+
         <!-- JobStore 配置 -->
         <prop key="org.quartz.jobStore.class">${org.quartz.jobStore.class}</prop>
         <!-- 集群配置 -->
         <prop key="org.quartz.jobStore.isClustered">true</prop>
         <prop key="org.quartz.jobStore.clusterCheckinInterval">15000</prop>
-        <prop key="org.quartz.jobStore.maxMisfiresToHandleAtATime">1</prop>
         <!-- 数据表设置 -->
         <prop key="org.quartz.jobStore.tablePrefix">${org.quartz.jobStore.tablePrefix}</prop>
-        <prop key="org.quartz.jobStore.dataSource">${org.quartz.jobStore.dataSource}</prop>
+<!--        <prop key="org.quartz.jobStore.dataSource">${org.quartz.jobStore.dataSource}</prop>-->
       </props>
     </property>
   </bean>

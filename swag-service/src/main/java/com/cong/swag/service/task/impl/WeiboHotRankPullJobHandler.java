@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * @Description TODO
+ * @Description 微博热搜推送任务
  * @Author zheng cong
  * @Date 2019-07-19
  */

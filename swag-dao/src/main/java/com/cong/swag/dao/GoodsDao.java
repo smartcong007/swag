@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
  * @Author zheng cong
  * @Date 2019-06-09
  */
-public interface GoodsDao {
+public interface  GoodsDao {
 
     int addGoods(GoodsVO goodsVO);
 

@@ -41,7 +41,7 @@ public class TaskProducerImpl implements TaskProducer {
             throw new IllegalArgumentException();
         }
         if (scheduler.getJobDetail(JobKey.jobKey(jobName, jobGroup)) != null) {
-            scheduler.deleteJob(JobKey.jobKey(jobName, jobGroup));
+            return;
         }
         JobDetail jobDetail = JobBuilder.newJob(JobFactory.class).withIdentity(jobName, jobGroup).build();
         jobDetail.getJobDataMap().put("jobModel", jobModel);

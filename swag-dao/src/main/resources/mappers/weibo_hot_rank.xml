@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cong.swag.dao.WeiboHotRankDao">
+  <resultMap id="resultMap" type="com.cong.swag.common.VO.WeiboHotRankItemVO">
+    <result property="id" column="id" />
+    <result property="label" column="label" />
+    <result property="title" column="title" />
+    <result property="link" column="link" />
+    <result property="hits" column="hits" />
+  </resultMap>
+
+  <insert id="insert" parameterType="java.util.List">
+    insert into weibo_hot_rank(id, label, title, link, hits)
+    values
+    <foreach collection="items" item="item" separator=",">
+      (#{item.id}, #{item.label}, #{item.title}, #{item.link}, #{item.hits})
+    </foreach>
+  </insert>
+
+  <delete id="deleteAll">
+    delete from weibo_hot_rank where 1=1
+  </delete>
+
+  <select id="getById" resultMap="resultMap">
+    select * from weibo_hot_rank where id=#{id}
+  </select>
+</mapper>

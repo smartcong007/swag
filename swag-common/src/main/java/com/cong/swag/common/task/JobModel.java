@@ -1,6 +1,7 @@
 package com.cong.swag.common.task;
 import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -13,6 +14,7 @@ public class JobModel implements Serializable {
 
     private static final long serialVersionUID = 5469712418493396802L;
 
+    @NotNull
     private String jobHandler;
 
     private Object jobContent;

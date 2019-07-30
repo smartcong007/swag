@@ -65,10 +65,19 @@ public class ShardingDataSourceConfig {
         tableRuleConfiguration1.setLogicTable("goods");
         tableRuleConfiguration1.setActualDataNodes("sharding_db_001.goods");
 
+        TableRuleConfiguration tableRuleConfiguration2 = new TableRuleConfiguration();
+        tableRuleConfiguration2.setDatabaseShardingStrategyConfig(new HintShardingStrategyConfiguration(
+            new HintShardingDatasourceAlgotithm()));
+        tableRuleConfiguration2.setTableShardingStrategyConfig(
+            new HintShardingStrategyConfiguration(new HintShardingTableAlgotithm()));
+        tableRuleConfiguration2.setLogicTable("weibo_hot_rank");
+        tableRuleConfiguration2.setActualDataNodes("sharding_db_001.weibo_hot_rank");
+
 
         //将构造好的特定分表规则配置加入到分片配置对象中
         shardingRuleConfiguration.getTableRuleConfigs().add(tableRuleConfiguration);
         shardingRuleConfiguration.getTableRuleConfigs().add(tableRuleConfiguration1);
+        shardingRuleConfiguration.getTableRuleConfigs().add(tableRuleConfiguration2);
         //利用数据源集合加上构造好的分片规则配置创建一个可供orm直接使用的数据源
         return ShardingDataSourceFactory
             .createDataSource(dataSourceMap, shardingRuleConfiguration, Collections.emptyMap(), props);

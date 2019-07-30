@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
- * @Description TODO
+ * @Description 跨域过滤器
  * @Author zheng cong
  * @Date 2019-01-04
  */

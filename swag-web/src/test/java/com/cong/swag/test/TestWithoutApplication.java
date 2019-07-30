@@ -1,12 +1,13 @@
 package com.cong.swag.test;
 
-import com.alibaba.fastjson.JSONObject;
-import com.cong.swag.common.VO.UserVO;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @Description TODO
@@ -14,6 +15,9 @@ import org.junit.Test;
  * @Date 2019-06-10
  */
 public class TestWithoutApplication {
+
+    /** logger */
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestWithoutApplication.class);
 
     private static Object obj = new Object();
 
@@ -91,25 +95,17 @@ public class TestWithoutApplication {
             }
         }
         return -1;
-
     }
 
     @Test
-    public void test(){
-        List<UserVO> userVOS = new ArrayList<>(2);
-        UserVO userVO1 = new UserVO();
-        userVO1.setId(1);
-
-        UserVO userVO2 = new UserVO();
-        userVO2.setId(2);
-
-        userVOS.add(userVO1);
-        userVOS.add(userVO2);
-
-        UserVO[] users = userVOS.toArray(new UserVO[userVOS.size()]);
-        for (UserVO u:users) {
-            System.out.println(JSONObject.toJSONString(u));
-        }
+    public int[] sds(){
+       Long i = 123l;
+        BigDecimal a = BigDecimal.valueOf(i);
+        BigDecimal b = BigDecimal.valueOf(10000);
+        System.out.println(a.divide(b));
+        Map<Integer, Integer> map = new HashMap<>();
+        int []ii = new int[]{};
+        return new int[]{};
     }
 
 }
