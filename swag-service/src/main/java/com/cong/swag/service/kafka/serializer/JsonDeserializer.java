@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.kafka.common.serialization.Deserializer;
 
 /**
- * @Description TODO
+ * @Description kafka自定义json反序列化器
  * @Author zheng cong
  * @Date 2019-07-24
  */

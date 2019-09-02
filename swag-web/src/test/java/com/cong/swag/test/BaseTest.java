@@ -1,8 +1,11 @@
 package com.cong.swag.test;
 
+import com.alibaba.fastjson.JSONArray;
 import com.cong.swag.common.VO.WeiboHotRankItemVO;
+import com.cong.swag.common.cache.RedisRepository;
 import com.cong.swag.dao.WeiboHotRankDao;
 import com.cong.swag.service.task.impl.WeiboHotRankSyncJobHandler;
+import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +30,9 @@ public class BaseTest {
     @Autowired
     WeiboHotRankDao weiboHotRankDao;
 
+    @Autowired
+    RedisRepository redisRepository;
+
     @Test
     public void test(){
         weiboHotRankSyncJobHandler.handleJob(null);
@@ -36,6 +42,14 @@ public class BaseTest {
     public void testDao(){
         WeiboHotRankItemVO itemVO = weiboHotRankDao.getById(1);
         Assert.assertNotNull(itemVO);
+    }
+
+    @Test
+    public void testRedis(){
+        Set<WeiboHotRankItemVO> itemVOS = redisRepository.getZset("zset_test", true,1,4);
+        System.out.println(JSONArray.toJSONString(itemVOS));
+
+
     }
 
 }

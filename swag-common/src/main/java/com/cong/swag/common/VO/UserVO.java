@@ -39,4 +39,6 @@ public class UserVO implements Serializable {
     @Pattern(regexp = "^http[\\d]+")
     private String logo;
 
+
+
 }

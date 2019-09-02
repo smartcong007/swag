@@ -1,5 +1,6 @@
 package com.cong.swag.common.cache;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -46,6 +47,24 @@ public class RedisRepository {
             throw new IllegalArgumentException();
         }
         return redisTemplate.delete(key);
+    }
+
+    public void zsetPush(String key, Object val, double score) {
+        if (StringUtils.isEmpty(key)) {
+            throw new IllegalArgumentException();
+        }
+        redisTemplate.opsForZSet().add(key, val, score);
+    }
+
+    public Set getZset(String key, boolean reverse, long page, long pageSize) {
+        if (StringUtils.isEmpty(key)) {
+            throw new IllegalArgumentException();
+        }
+        if (reverse) {
+            return redisTemplate.opsForZSet().reverseRange(key, (page-1)*pageSize, page*pageSize);
+        }else {
+            return redisTemplate.opsForZSet().range(key, (page - 1) * pageSize, page * pageSize);
+        }
     }
 
 }
